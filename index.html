@@ -2,9 +2,11 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Лоев: Путешествие во времени</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; user-select:none;
+    -webkit-tap-highlight-color:transparent;
     font-family:'Segoe UI', Tahoma, sans-serif; }
 
 body { background:#0a0a0a; display:flex; justify-content:center;
@@ -48,16 +50,20 @@ body { background:#0a0a0a; display:flex; justify-content:center;
     background:linear-gradient(135deg, #e94560, #ff8a5c);
     border:2px solid #ff8a5c; box-shadow:0 0 15px rgba(233,69,96,0.9);
 }
+
 .btn {
     padding:16px 60px; font-size:22px; font-weight:bold;
     color:#fff; background:linear-gradient(135deg, #e94560, #b02a4a);
     border:none; border-radius:50px; cursor:pointer;
     letter-spacing:3px; text-transform:uppercase;
-    box-shadow:0 10px 30px rgba(233,69,96,0.6); transition:all 0.2s;
+    box-shadow:0 10px 30px rgba(233,69,96,0.6); transition:all 0.15s;
 }
-.btn:hover { transform:translateY(-3px) scale(1.03);
-             box-shadow:0 15px 40px rgba(233,69,96,0.8); }
-.btn:active { transform:translateY(0) scale(0.98); }
+@media (hover: hover) {
+    .btn:hover { transform:translateY(-3px) scale(1.03);
+                 box-shadow:0 15px 40px rgba(233,69,96,0.8); }
+}
+.btn:active { transform:scale(0.97);
+              box-shadow:0 4px 12px rgba(233,69,96,0.6); }
 
 /* === КОМНАТА === */
 #room { background:#1a1a1a; }
@@ -78,10 +84,13 @@ body { background:#0a0a0a; display:flex; justify-content:center;
     font-size:60px; filter:drop-shadow(0 15px 15px rgba(0,0,0,0.8));
     transition:transform 0.2s, filter 0.2s;
 }
-.obj:hover {
-    transform:scale(1.1) translateY(-8px);
-    filter:drop-shadow(0 20px 20px rgba(0,0,0,0.9)) brightness(1.4);
+@media (hover: hover) {
+    .obj:hover {
+        transform:scale(1.1) translateY(-8px);
+        filter:drop-shadow(0 20px 20px rgba(0,0,0,0.9)) brightness(1.4);
+    }
 }
+.obj:active { transform:scale(0.95); }
 .obj.done { opacity:0.15; pointer-events:none; filter:grayscale(1); }
 #obj-window {
     top:15%; left:10%; width:180px; height:160px;
@@ -155,12 +164,16 @@ body { background:#0a0a0a; display:flex; justify-content:center;
     position:absolute; bottom:20%; left:25%; font-size:100px; cursor:pointer;
     filter:drop-shadow(0 20px 20px rgba(0,0,0,0.6)); transition:transform 0.2s;
 }
-#street-person:hover { transform:scale(1.1) translateY(-10px); }
 #street-school {
     position:absolute; bottom:35%; right:15%; font-size:160px; cursor:pointer;
     filter:drop-shadow(0 20px 20px rgba(0,0,0,0.6)); transition:transform 0.2s;
 }
-#street-school:hover { transform:scale(1.1) translateY(-10px); }
+@media (hover: hover) {
+    #street-person:hover, #street-school:hover {
+        transform:scale(1.1) translateY(-10px);
+    }
+}
+#street-person:active, #street-school:active { transform:scale(0.95); }
 #street-person.done, #street-school.done {
     opacity:0.15; pointer-events:none; filter:grayscale(1);
 }
@@ -269,12 +282,20 @@ body { background:#0a0a0a; display:flex; justify-content:center;
     display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px;
 }
 #dlg-options .opt-btn {
-    font-size:15px; padding:12px 20px;
-    background:#1a1a2e; border:2px solid #e94560;
+    font-size:15px; padding:14px 20px;
+    background:#1a1a2e;
+    border:2px solid #e94560;
     color:#fff; border-radius:8px; cursor:pointer;
-    text-align:left; transition:all 0.2s; font-family:inherit;
+    text-align:left; transition:all 0.15s; font-family:inherit;
+    min-height:48px;
 }
-#dlg-options .opt-btn:hover { background:#e94560; transform:translateY(-2px); }
+@media (hover: hover) {
+    #dlg-options .opt-btn:hover { background:#e94560; transform:translateY(-2px); }
+}
+#dlg-options .opt-btn:active {
+    background:#c62a4a;
+    transform:scale(0.97);
+}
 #dlg-input { display:none; gap:10px; margin-top:15px; }
 #dlg-input.on { display:flex; }
 #dlg-input input {
@@ -290,6 +311,7 @@ body { background:#0a0a0a; display:flex; justify-content:center;
     background:#e94560; color:#fff; border-radius:8px;
     cursor:pointer; font-weight:bold;
 }
+#dlg-input button:active { background:#c62a4a; }
 #dlg-feedback {
     margin-top:12px; font-size:16px; font-weight:bold;
     text-align:center; min-height:22px;
@@ -305,22 +327,13 @@ body { background:#0a0a0a; display:flex; justify-content:center;
 }
 #final.active { display:flex; }
 #final h2 {
-    color:#4CAF50; font-size:32px; margin-bottom:15px;
+    color:#4CAF50; font-size:32px; margin-bottom:35px;
     text-align:center; display:none;
     text-shadow:0 0 40px rgba(76,175,80,0.8);
 }
-#final .final-sub {
-    color:#ffeb3b; font-size:22px;
-    text-align:center; display:none; margin-bottom:25px;
-    text-shadow:0 0 20px rgba(255,235,59,0.6);
-    font-style:italic;
-}
-
-/* Контейнер пазла-флага */
 #final-puzzle {
     position:relative;
-    width:420px;
-    height:280px;
+    width:420px; height:280px;
     border:6px solid #e94560;
     border-radius:20px;
     padding:10px;
@@ -328,7 +341,6 @@ body { background:#0a0a0a; display:flex; justify-content:center;
     box-shadow:0 0 60px rgba(233,69,96,0.5);
     overflow:hidden;
 }
-
 #flag-svg {
     position:absolute;
     top:10px; left:10px;
@@ -337,26 +349,19 @@ body { background:#0a0a0a; display:flex; justify-content:center;
     display:block;
     border-radius:10px;
 }
-
 #final-puzzle .piece {
     position:absolute;
-    width:50%;
-    height:50%;
+    width:50%; height:50%;
     background:linear-gradient(135deg, #2a2a3a, #1a1a2e);
     border:2px solid #e94560;
     transition:all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     opacity:1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#e94560;
-    font-size:30px;
-    font-weight:bold;
+    display:flex; align-items:center; justify-content:center;
+    color:#e94560; font-size:30px; font-weight:bold;
     box-sizing:border-box;
 }
 #final-puzzle .piece.placed {
-    opacity:0;
-    transform:scale(1.3) rotate(15deg);
+    opacity:0; transform:scale(1.3) rotate(15deg);
     pointer-events:none;
 }
 #final-puzzle #fp0 { top:10px;    left:10px;    }
@@ -396,15 +401,12 @@ body { background:#0a0a0a; display:flex; justify-content:center;
     background:linear-gradient(135deg, #e94560, #b02a4a);
     border-radius:20px; color:#fff;
     font-size:15px; font-weight:bold;
-    cursor:pointer; user-select:none;
-    transition:all 0.2s;
+    cursor:pointer;
     border:2px solid #ff8a5c;
     box-shadow:0 4px 10px rgba(233,69,96,0.4);
+    transition:transform 0.15s;
 }
-.chip:hover {
-    transform:scale(1.05);
-    background:linear-gradient(135deg, #ff5a7a, #e94560);
-}
+.chip:active { transform:scale(0.95); }
 .chip::after {
     content:' ✕'; font-size:12px; opacity:0.7; margin-left:5px;
 }
@@ -415,32 +417,37 @@ body { background:#0a0a0a; display:flex; justify-content:center;
     max-width: 850px; margin-left:auto; margin-right:auto;
 }
 .drag-item {
-    padding:10px 18px; background:#1a1a2e;
+    padding:12px 22px; background:#1a1a2e;
     border:3px solid #e94560; border-radius:10px;
     color:#fff; font-size:16px; font-weight:bold;
-    cursor:grab; user-select:none;
-    transition:all 0.2s;
+    cursor:pointer; transition:all 0.15s;
+    min-height:44px; display:flex; align-items:center;
 }
-.drag-item:hover { background:#e94560; transform:translateY(-2px); }
-.drag-item.taken {
+@media (hover: hover) {
+    .drag-item:hover { background:#e94560; transform:translateY(-2px); }
+}
+.drag-item:active { transform:scale(0.95); }
+.drag-item.taken, .drag-item.used {
     opacity:0.2; pointer-events:none;
 }
-.drag-item:active { cursor:grabbing; }
 
 .drag-wrap { display:flex; gap:30px; justify-content:center; margin:15px 0; }
 .drop-zone {
-    width:140px; height:60px;
+    width:150px; height:70px;
     border:3px dashed #e94560; border-radius:10px;
     display:flex; align-items:center; justify-content:center;
     color:#a8a8b3; font-size:16px;
     background:rgba(0,0,0,0.3); transition:all 0.2s;
+    cursor:pointer; min-height:44px;
 }
 .drop-zone.over { border-color:#4CAF50; background:rgba(76,175,80,0.2); }
 .drop-zone.filled {
     border-style:solid; border-color:#4CAF50;
     background:#1a1a2e; color:#fff;
-    font-size:22px; font-weight:bold;
+    font-size:24px; font-weight:bold;
+    cursor:pointer;
 }
+.drop-zone:active { transform:scale(0.97); }
 </style>
 </head>
 <body>
@@ -537,28 +544,92 @@ body { background:#0a0a0a; display:flex; justify-content:center;
     <!-- ФИНАЛ -->
     <div id="final" class="screen">
         <h2 id="final-msg">Поздравляю! Ты ответил на все вопросы, так держать!!!</h2>
-        <div class="final-sub" id="final-sub">а мне 10 за этот проект)</div>
         <div id="final-puzzle">
-            <svg id="flag-svg" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
-                <rect x="0" y="0" width="300" height="133" fill="#5ba3d9"/>
-                <rect x="0" y="133" width="300" height="67" fill="#2e8b3e"/>
-                <g fill="#ffffff">
-                    <rect x="110" y="75" width="22" height="65"/>
-                    <polygon points="105,75 121,48 137,75"/>
-                    <rect x="168" y="75" width="22" height="65"/>
-                    <polygon points="163,75 179,48 195,75"/>
-                    <rect x="138" y="60" width="24" height="80"/>
-                    <polygon points="133,60 150,28 167,60"/>
+            <svg id="flag-svg" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#6bb6e8"/>
+                        <stop offset="100%" stop-color="#4a93cc"/>
+                    </linearGradient>
+                    <linearGradient id="grassGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#3a9d4e"/>
+                        <stop offset="100%" stop-color="#1e5c2c"/>
+                    </linearGradient>
+                    <linearGradient id="castleGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#ffffff"/>
+                        <stop offset="100%" stop-color="#d8e4ee"/>
+                    </linearGradient>
+                    <linearGradient id="roofGrad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#ffffff"/>
+                        <stop offset="100%" stop-color="#b8c9d9"/>
+                    </linearGradient>
+                </defs>
+
+                <!-- Небо -->
+                <rect x="0" y="0" width="300" height="133" fill="url(#skyGrad)"/>
+                <!-- Облака -->
+                <ellipse cx="70" cy="30" rx="28" ry="8" fill="rgba(255,255,255,0.35)"/>
+                <ellipse cx="90" cy="28" rx="20" ry="6" fill="rgba(255,255,255,0.35)"/>
+                <ellipse cx="230" cy="45" rx="24" ry="7" fill="rgba(255,255,255,0.25)"/>
+
+                <!-- Зелёная полоса -->
+                <rect x="0" y="133" width="300" height="67" fill="url(#grassGrad)"/>
+                <!-- Тень под замком -->
+                <ellipse cx="150" cy="145" rx="75" ry="6" fill="rgba(0,0,0,0.22)"/>
+
+                <!-- ЛЕВАЯ БАШНЯ -->
+                <g>
+                    <rect x="98" y="85" width="28" height="55" fill="url(#castleGrad)" stroke="#8da9bf" stroke-width="0.6"/>
+                    <rect x="98"  y="79" width="5" height="8" fill="#ffffff" stroke="#8da9bf" stroke-width="0.5"/>
+                    <rect x="109" y="79" width="5" height="8" fill="#ffffff" stroke="#8da9bf" stroke-width="0.5"/>
+                    <rect x="120" y="79" width="5" height="8" fill="#ffffff" stroke="#8da9bf" stroke-width="0.5"/>
+                    <polygon points="94,79 112,57 130,79" fill="url(#roofGrad)" stroke="#8da9bf" stroke-width="0.8" stroke-linejoin="round"/>
+                    <line x1="112" y1="57" x2="112" y2="79" stroke="#8da9bf" stroke-width="0.4" opacity="0.5"/>
+                    <rect x="109" y="95" width="6" height="12" rx="3" fill="#3d7aab"/>
+                    <line x1="112" y1="95" x2="112" y2="107" stroke="#8da9bf" stroke-width="0.5"/>
+                    <rect x="110" y="118" width="4" height="9" rx="2" fill="#3d7aab"/>
                 </g>
-                <rect x="141" y="75" width="6" height="10" fill="#5ba3d9"/>
-                <rect x="153" y="75" width="6" height="10" fill="#5ba3d9"/>
-                <rect x="144" y="100" width="12" height="18" fill="#5ba3d9" rx="6"/>
-                <path d="M 55 152 Q 85 142 115 152 T 175 152 T 235 152 T 295 152"
-                      stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round"/>
-                <path d="M 55 170 Q 85 160 115 170 T 175 170 T 235 170 T 295 170"
-                      stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round"/>
-                <path d="M 55 188 Q 85 178 115 188 T 175 188 T 235 188 T 295 188"
-                      stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+                <!-- ПРАВАЯ БАШНЯ -->
+                <g>
+                    <rect x="174" y="85" width="28" height="55" fill="url(#castleGrad)" stroke="#8da9bf" stroke-width="0.6"/>
+                    <rect x="174" y="79" width="5" height="8" fill="#ffffff" stroke="#8da9bf" stroke-width="0.5"/>
+                    <rect x="185" y="79" width="5" height="8" fill="#ffffff" stroke="#8da9bf" stroke-width="0.5"/>
+                    <rect x="196" y="79" width="5" height="8" fill="#ffffff" stroke="#8da9bf" stroke-width="0.5"/>
+                    <polygon points="170,79 188,57 206,79" fill="url(#roofGrad)" stroke="#8da9bf" stroke-width="0.8" stroke-linejoin="round"/>
+                    <line x1="188" y1="57" x2="188" y2="79" stroke="#8da9bf" stroke-width="0.4" opacity="0.5"/>
+                    <rect x="185" y="95" width="6" height="12" rx="3" fill="#3d7aab"/>
+                    <line x1="188" y1="95" x2="188" y2="107" stroke="#8da9bf" stroke-width="0.5"/>
+                    <rect x="186" y="118" width="4" height="9" rx="2" fill="#3d7aab"/>
+                </g>
+
+                <!-- ЦЕНТРАЛЬНАЯ БАШНЯ -->
+                <g>
+                    <rect x="133" y="65" width="34" height="75" fill="url(#castleGrad)" stroke="#8da9bf" stroke-width="0.6"/>
+                    <rect x="133" y="59" width="6" height="9" fill="#ffffff" stroke="#8da9bf" stroke-width="0.5"/>
+                    <rect x="145" y="59" width="6" height="9" fill="#ffffff" stroke="#8da9bf" stroke-width="0.5"/>
+                    <rect x="157" y="59" width="6" height="9" fill="#ffffff" stroke="#8da9bf" stroke-width="0.5"/>
+                    <polygon points="128,59 150,26 172,59" fill="url(#roofGrad)" stroke="#8da9bf" stroke-width="0.8" stroke-linejoin="round"/>
+                    <line x1="150" y1="26" x2="150" y2="59" stroke="#8da9bf" stroke-width="0.4" opacity="0.5"/>
+                    <line x1="150" y1="26" x2="150" y2="13" stroke="#7a7a7a" stroke-width="1"/>
+                    <polygon points="150,13 164,17 150,21" fill="#d32f2f"/>
+                    <circle cx="150" cy="13" r="1.3" fill="#7a7a7a"/>
+                    <rect x="140" y="73" width="5" height="8" rx="2.5" fill="#3d7aab"/>
+                    <rect x="155" y="73" width="5" height="8" rx="2.5" fill="#3d7aab"/>
+                    <rect x="143" y="89" width="5" height="8" rx="2.5" fill="#3d7aab"/>
+                    <rect x="152" y="89" width="5" height="8" rx="2.5" fill="#3d7aab"/>
+                    <path d="M 141 140 L 141 118 Q 150 106 159 118 L 159 140 Z"
+                          fill="#3d7aab" stroke="#8da9bf" stroke-width="0.6"/>
+                    <line x1="150" y1="112" x2="150" y2="140" stroke="#8da9bf" stroke-width="0.6"/>
+                    <circle cx="150" cy="102" r="1.8" fill="#8da9bf"/>
+                </g>
+
+                <!-- ТРИ ВОЛНЫ -->
+                <g fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M 35 152 Q 52 146 70 152 T 105 152 T 140 152 T 175 152 T 210 152 T 245 152 T 280 152"/>
+                    <path d="M 35 168 Q 52 162 70 168 T 105 168 T 140 168 T 175 168 T 210 168 T 245 168 T 280 168"/>
+                    <path d="M 35 184 Q 52 178 70 184 T 105 184 T 140 184 T 175 184 T 210 184 T 245 184 T 280 184"/>
+                </g>
             </svg>
             <div class="piece" id="fp0">1</div>
             <div class="piece" id="fp1">2</div>
@@ -655,12 +726,12 @@ var WWII_YEARS = ['1941', '1945', '1892', '1749', '1939', '1943', '1958', '1991'
 
 var HIST_QUESTIONS = [
     {
-        text: 'В состав каких государств входила территория современной Беларуси? Найди и перетащи все 4 правильные страны в поле.',
+        text: 'В состав каких государств входила территория современной Беларуси? Найди и добавь все 4 правильные страны в поле.',
         dragMode: 'multi',
         correctAnswers: CORRECT_COUNTRIES
     },
     {
-        text: 'В каких годах происходила ВОВ?',
+        text: 'В каких годах происходила ВОВ? Тапни по годам 1941 и 1945, чтобы добавить их в поля.',
         dragMode: 'ordered',
         dragItems: WWII_YEARS,
         zones: ['Начало', 'Конец']
@@ -752,7 +823,6 @@ $('btn-restart').addEventListener('click', function() {
     state.pieces = 0;
     updatePreview();
     $('final-msg').style.display = 'none';
-    $('final-sub').style.display = 'none';
     $('btn-restart').style.display = 'none';
     var pieces = document.querySelectorAll('#final-puzzle .piece');
     for (var i = 0; i < pieces.length; i++) pieces[i].classList.remove('placed');
@@ -930,22 +1000,22 @@ function initHistory() {
         var shuffledYears = shuffle(q.dragItems.slice());
         var itemsHtml = '';
         for (var i = 0; i < shuffledYears.length; i++) {
-            itemsHtml += '<div class="drag-item" draggable="true" data-val="' + shuffledYears[i] + '">' + shuffledYears[i] + '</div>';
+            itemsHtml += '<div class="drag-item" data-val="' + shuffledYears[i] + '">' + shuffledYears[i] + '</div>';
         }
 
         var html =
             '<div class="drag-wrap">' +
                 '<div style="text-align:center;">' +
-                    '<div class="drop-zone" id="dz0">' + q.zones[0] + '</div>' +
+                    '<div class="drop-zone" id="dz0" data-placeholder="Начало">Начало</div>' +
                 '</div>' +
                 '<div style="text-align:center;">' +
-                    '<div class="drop-zone" id="dz1">' + q.zones[1] + '</div>' +
+                    '<div class="drop-zone" id="dz1" data-placeholder="Конец">Конец</div>' +
                 '</div>' +
             '</div>' +
-            '<div class="drag-label" style="margin-top:15px;">📦 Доступные года (перетащи 2 нужных):</div>' +
+            '<div class="drag-label" style="margin-top:15px;">📦 Доступные года (тапни по нужным):</div>' +
             '<div class="drag-items" id="years-pool">' + itemsHtml + '</div>' +
             '<div style="text-align:center; margin-top:15px;">' +
-                '<button class="opt-btn" id="btn-check-drag" style="padding:12px 40px;">Проверить</button>' +
+                '<button class="opt-btn" id="btn-check-drag" style="padding:14px 40px; font-size:16px;">Проверить</button>' +
             '</div>';
         showDialogue('Елена Васильевна: "' + q.text + '"', html, false, '👩‍🏫');
         setupOrderedDrag();
@@ -967,117 +1037,39 @@ function initHistory() {
     for (var j = 0; j < btns.length; j++) btns[j].addEventListener('click', onOptionClick);
 }
 
-// ========== MULTI DRAG (страны) ==========
+// ========== MULTI DRAG (страны) — тап/клик ==========
 function buildMultiDragHtml(q) {
     var wrongs = shuffle(WRONG_COUNTRIES_POOL.slice()).slice(0, 4);
     var allItems = shuffle(q.correctAnswers.concat(wrongs));
 
     var itemsHtml = '';
     for (var i = 0; i < allItems.length; i++) {
-        itemsHtml += '<div class="drag-item" draggable="true" data-val="' + allItems[i] + '">' + allItems[i] + '</div>';
+        itemsHtml += '<div class="drag-item" data-val="' + allItems[i] + '">' + allItems[i] + '</div>';
     }
 
     return (
         '<div class="drag-area">' +
-            '<div class="drag-label">📥 Перетащи правильные государства в поле ниже:</div>' +
+            '<div class="drag-label">👆 Тапни по правильным странам, чтобы добавить их в поле:</div>' +
             '<div class="multi-drop" id="multi-drop">' +
-                '<div class="placeholder" id="multi-placeholder">Сюда нужно перетащить все 4 правильные страны</div>' +
+                '<div class="placeholder" id="multi-placeholder">Сюда нужно добавить все 4 правильные страны</div>' +
             '</div>' +
             '<div class="drag-label">📦 Доступные варианты:</div>' +
             '<div class="drag-items" id="drag-pool">' + itemsHtml + '</div>' +
             '<div style="text-align:center; margin-top:20px;">' +
-                '<button class="opt-btn" id="btn-check-multi" style="padding:12px 40px;">Проверить</button>' +
+                '<button class="opt-btn" id="btn-check-multi" style="padding:14px 40px; font-size:16px;">Проверить</button>' +
             '</div>' +
         '</div>'
     );
 }
 
 function setupMultiDrag() {
-    var dropZone = $('multi-drop');
-
-    // HTML5 drag&drop на всякий случай
-    dropZone.addEventListener('dragover', function(e) {
-        e.preventDefault();
-        this.classList.add('over');
-    });
-    dropZone.addEventListener('dragleave', function(e) {
-        if (e.target === this) this.classList.remove('over');
-    });
-    dropZone.addEventListener('drop', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        this.classList.remove('over');
-        var val = e.dataTransfer.getData('text/plain');
-        if (val) addChip(val);
-    });
-
     var items = document.querySelectorAll('#drag-pool .drag-item');
     for (var i = 0; i < items.length; i++) {
-        (function(item) {
-            item.style.cursor = 'pointer';
-
-            // Клик — самый надёжный способ
-            item.addEventListener('click', function() {
-                if (this.classList.contains('taken')) return;
-                addChip(this.dataset.val);
-            });
-
-            // Mouse-drag (работает в любом iframe)
-            item.addEventListener('mousedown', function(e) {
-                if (this.classList.contains('taken')) return;
-                e.preventDefault();
-
-                var self = this;
-                var val = self.dataset.val;
-                var startX = e.clientX;
-                var startY = e.clientY;
-                var dragStarted = false;
-                var ghost = null;
-
-                function onMove(ev) {
-                    var dx = ev.clientX - startX;
-                    var dy = ev.clientY - startY;
-
-                    if (!dragStarted && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
-                        dragStarted = true;
-                        ghost = self.cloneNode(true);
-                        ghost.style.cssText =
-                            'position:fixed; pointer-events:none; z-index:99999; ' +
-                            'opacity:0.85; transform:scale(1.05); ' +
-                            'left:' + (ev.clientX - 40) + 'px; ' +
-                            'top:' + (ev.clientY - 20) + 'px; ' +
-                            'background:#e94560; border-color:#ff8a5c;';
-                        document.body.appendChild(ghost);
-                        self.style.opacity = '0.3';
-                    }
-
-                    if (dragStarted && ghost) {
-                        ghost.style.left = (ev.clientX - 40) + 'px';
-                        ghost.style.top = (ev.clientY - 20) + 'px';
-                    }
-                }
-
-                function onUp(ev) {
-                    document.removeEventListener('mousemove', onMove);
-                    document.removeEventListener('mouseup', onUp);
-                    if (ghost) ghost.remove();
-                    self.style.opacity = '';
-
-                    if (dragStarted) {
-                        var rect = dropZone.getBoundingClientRect();
-                        if (ev.clientX >= rect.left && ev.clientX <= rect.right &&
-                            ev.clientY >= rect.top && ev.clientY <= rect.bottom) {
-                            addChip(val);
-                        }
-                    }
-                }
-
-                document.addEventListener('mousemove', onMove);
-                document.addEventListener('mouseup', onUp);
-            });
-        })(items[i]);
+        items[i].addEventListener('click', function() {
+            if (this.classList.contains('taken')) return;
+            addChip(this.dataset.val);
+        });
     }
-
     $('btn-check-multi').addEventListener('click', checkMultiDrop);
 }
 
@@ -1134,7 +1126,7 @@ function updateMultiDropHint() {
     if (n === 0) hint.textContent = '';
     else if (n < 4) hint.textContent = 'Выбрано: ' + n + ' / 4';
     else if (n === 4) hint.textContent = 'Выбрано: 4 / 4 — можно проверять!';
-    else hint.textContent = '⚠ Выбрано слишком много: ' + n + ' / 4';
+    else hint.textContent = '⚠ Слишком много: ' + n + ' / 4';
 }
 
 function checkMultiDrop() {
@@ -1157,41 +1149,43 @@ function checkMultiDrop() {
         state.histIdx++;
         setTimeout(function() { closeDialogue(); initHistory(); }, 1000);
     } else {
-        fb('❌ Неправильно. Подумай ещё, какие государства тут были.', false);
+        fb('❌ Неправильно. Подумай ещё.', false);
     }
 }
 
-// ========== ORDERED DRAG (года) ==========
+// ========== ORDERED DRAG (года) — тап/клик ==========
 function setupOrderedDrag() {
-    var items = document.querySelectorAll('.drag-item');
+    var items = document.querySelectorAll('#years-pool .drag-item');
     var zones = document.querySelectorAll('.drop-zone');
 
     for (var i = 0; i < items.length; i++) {
-        items[i].addEventListener('dragstart', function(e) {
-            e.dataTransfer.setData('text/plain', this.getAttribute('data-val'));
-            e.dataTransfer.effectAllowed = 'move';
+        items[i].addEventListener('click', function() {
+            if (this.classList.contains('used')) return;
+            var val = this.dataset.val;
+            for (var z = 0; z < zones.length; z++) {
+                if (!zones[z].classList.contains('filled')) {
+                    zones[z].textContent = val;
+                    zones[z].dataset.val = val;
+                    zones[z].classList.add('filled');
+                    this.classList.add('used');
+                    break;
+                }
+            }
         });
     }
+
     for (var j = 0; j < zones.length; j++) {
-        zones[j].addEventListener('dragover', function(e) {
-            e.preventDefault();
-            this.classList.add('over');
-        });
-        zones[j].addEventListener('dragleave', function() {
-            this.classList.remove('over');
-        });
-        zones[j].addEventListener('drop', function(e) {
-            e.preventDefault();
-            this.classList.remove('over');
-            var val = e.dataTransfer.getData('text/plain');
-            this.textContent = val;
-            this.setAttribute('data-val', val);
-            this.classList.add('filled');
-            var allItems = document.querySelectorAll('.drag-item');
+        zones[j].addEventListener('click', function() {
+            if (!this.classList.contains('filled')) return;
+            var val = this.dataset.val;
+            this.textContent = this.dataset.placeholder;
+            this.removeAttribute('data-val');
+            this.classList.remove('filled');
+
+            var allItems = document.querySelectorAll('#years-pool .drag-item');
             for (var k = 0; k < allItems.length; k++) {
-                if (allItems[k].getAttribute('data-val') === val) {
-                    allItems[k].style.opacity = '0.3';
-                    allItems[k].setAttribute('draggable', 'false');
+                if (allItems[k].dataset.val === val) {
+                    allItems[k].classList.remove('used');
                 }
             }
         });
@@ -1214,7 +1208,6 @@ function setupOrderedDrag() {
 function showFinal() {
     showScreen('final');
     $('final-msg').style.display = 'block';
-    $('final-sub').style.display = 'block';
 
     var ids = ['fp0', 'fp1', 'fp2', 'fp3'];
     ids.forEach(function(id, i) {
