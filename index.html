@@ -21,7 +21,6 @@ body { background:#0a0a0a; display:flex; justify-content:center;
 .screen { position:absolute; top:0; left:0; width:100%; height:100%; display:none; }
 .screen.active { display:block; }
 
-/* === MUTE КНОПКА === */
 #mute-btn {
     position:fixed;
     top:15px;
@@ -45,7 +44,6 @@ body { background:#0a0a0a; display:flex; justify-content:center;
 #mute-btn:active { transform:scale(0.95); }
 #mute-btn.muted { opacity:0.4; border-color:#555; }
 
-/* === МЕНЮ === */
 #menu {
     background: radial-gradient(circle at center, #1a2a4a 0%, #0a0a15 100%);
     display:none; flex-direction:column; align-items:center; justify-content:center;
@@ -99,7 +97,6 @@ body { background:#0a0a0a; display:flex; justify-content:center;
 .btn:active { transform:scale(0.97);
               box-shadow:0 4px 12px rgba(233,69,96,0.6); }
 
-/* === КОМНАТА === */
 #room { background:#1a1a1a; }
 .room-wall {
     position:absolute; top:0; left:0; width:100%; height:65%;
@@ -174,7 +171,6 @@ body { background:#0a0a0a; display:flex; justify-content:center;
     filter:drop-shadow(0 20px 20px rgba(0,0,0,0.8));
 }
 
-/* === УЛИЦА === */
 #street {
     background:linear-gradient(to bottom,
         #4a90d9 0%, #87CEEB 55%, #90EE90 55%, #3a7a3a 100%);
@@ -216,7 +212,6 @@ body { background:#0a0a0a; display:flex; justify-content:center;
     opacity:0.15; pointer-events:none; filter:grayscale(1);
 }
 
-/* === КЛАССЫ === */
 .classroom {
     position:absolute; top:0; left:0; width:100%; height:100%;
     overflow:hidden;
@@ -294,7 +289,6 @@ body { background:#0a0a0a; display:flex; justify-content:center;
     filter:drop-shadow(0 5px 5px rgba(0,0,0,0.5));
 }
 
-/* === ДИАЛОГ === */
 #dialogue {
     position:absolute; bottom:0; left:0; width:100%;
     background:rgba(10,10,15,0.96);
@@ -357,7 +351,6 @@ body { background:#0a0a0a; display:flex; justify-content:center;
 .fb-ok { color:#4CAF50; text-shadow:0 0 10px rgba(76,175,80,0.6); }
 .fb-no { color:#f44336; text-shadow:0 0 10px rgba(244,67,54,0.6); }
 
-/* === ФИНАЛ === */
 #final {
     background:radial-gradient(circle at center, #1a2a4a 0%, #0a0a15 100%);
     display:none; flex-direction:column;
@@ -413,7 +406,6 @@ body { background:#0a0a0a; display:flex; justify-content:center;
     font-family:monospace; z-index:9999; pointer-events:none;
 }
 
-/* === DRAG & DROP === */
 .drag-area { margin-top:15px; }
 .drag-label {
     color:#a8a8b3; font-size:14px; margin-bottom:8px;
@@ -494,7 +486,6 @@ body { background:#0a0a0a; display:flex; justify-content:center;
 
 <div id="game">
 
-    <!-- МЕНЮ -->
     <div id="menu" class="screen active">
         <h1>ЛОЕВ</h1>
         <div class="subtitle">ПУТЕШЕСТВИЕ ВО ВРЕМЕНИ</div>
@@ -508,7 +499,6 @@ body { background:#0a0a0a; display:flex; justify-content:center;
         <button class="btn" id="btn-play">ИГРАТЬ</button>
     </div>
 
-    <!-- КОМНАТА -->
     <div id="room" class="screen">
         <div class="room-wall"></div>
         <div class="room-floor"></div>
@@ -523,7 +513,6 @@ body { background:#0a0a0a; display:flex; justify-content:center;
         <div class="player">🧑</div>
     </div>
 
-    <!-- УЛИЦА -->
     <div id="street" class="screen">
         <div class="sun"></div>
         <div class="cloud cloud-1"></div>
@@ -533,7 +522,6 @@ body { background:#0a0a0a; display:flex; justify-content:center;
         <div class="player" style="bottom:5%;left:45%;">🧑</div>
     </div>
 
-    <!-- ГЕОГРАФИЯ -->
     <div id="geo" class="screen">
         <div class="classroom">
             <div class="cabinet-number">Кабинет географии №33</div>
@@ -558,7 +546,6 @@ body { background:#0a0a0a; display:flex; justify-content:center;
         </div>
     </div>
 
-    <!-- ИСТОРИЯ -->
     <div id="history" class="screen">
         <div class="classroom">
             <div class="cabinet-number">Кабинет истории Беларуси №31</div>
@@ -583,7 +570,6 @@ body { background:#0a0a0a; display:flex; justify-content:center;
         </div>
     </div>
 
-    <!-- ФИНАЛ -->
     <div id="final" class="screen">
         <h2 id="final-msg">Поздравляю! Ты ответил на все вопросы, так держать!!!</h2>
         <div id="final-puzzle">
@@ -615,7 +601,6 @@ body { background:#0a0a0a; display:flex; justify-content:center;
                 <rect x="0" y="133" width="300" height="67" fill="url(#grassGrad)"/>
                 <ellipse cx="150" cy="145" rx="75" ry="6" fill="rgba(0,0,0,0.22)"/>
 
-                <!-- ЛЕВАЯ БАШНЯ -->
                 <g>
                     <rect x="98" y="85" width="28" height="55" fill="url(#castleGrad)" stroke="#8da9bf" stroke-width="0.6"/>
                     <rect x="98"  y="79" width="5" height="8" fill="#ffffff" stroke="#8da9bf" stroke-width="0.5"/>
@@ -628,7 +613,6 @@ body { background:#0a0a0a; display:flex; justify-content:center;
                     <rect x="110" y="118" width="4" height="9" rx="2" fill="#3d7aab"/>
                 </g>
 
-                <!-- ПРАВАЯ БАШНЯ -->
                 <g>
                     <rect x="174" y="85" width="28" height="55" fill="url(#castleGrad)" stroke="#8da9bf" stroke-width="0.6"/>
                     <rect x="174" y="79" width="5" height="8" fill="#ffffff" stroke="#8da9bf" stroke-width="0.5"/>
@@ -641,7 +625,6 @@ body { background:#0a0a0a; display:flex; justify-content:center;
                     <rect x="186" y="118" width="4" height="9" rx="2" fill="#3d7aab"/>
                 </g>
 
-                <!-- ЦЕНТРАЛЬНАЯ БАШНЯ -->
                 <g>
                     <rect x="133" y="65" width="34" height="75" fill="url(#castleGrad)" stroke="#8da9bf" stroke-width="0.6"/>
                     <rect x="133" y="59" width="6" height="9" fill="#ffffff" stroke="#8da9bf" stroke-width="0.5"/>
@@ -662,7 +645,6 @@ body { background:#0a0a0a; display:flex; justify-content:center;
                     <circle cx="150" cy="102" r="1.8" fill="#8da9bf"/>
                 </g>
 
-                <!-- ТРИ ВОЛНЫ -->
                 <g fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M 35 152 Q 52 146 70 152 T 105 152 T 140 152 T 175 152 T 210 152 T 245 152 T 280 152"/>
                     <path d="M 35 168 Q 52 162 70 168 T 105 168 T 140 168 T 175 168 T 210 168 T 245 168 T 280 168"/>
@@ -677,7 +659,6 @@ body { background:#0a0a0a; display:flex; justify-content:center;
         <button class="btn" id="btn-restart" style="display:none; margin-top:35px;">ИГРАТЬ СНОВА</button>
     </div>
 
-    <!-- ДИАЛОГ -->
     <div id="dialogue">
         <div class="dlg-header">
             <div class="dlg-avatar" id="dlg-avatar">🧑</div>
@@ -697,7 +678,7 @@ body { background:#0a0a0a; display:flex; justify-content:center;
 
 <script>
 // ============================================================
-// === АУДИО-СИСТЕМА (Web Audio API, без внешних файлов) ===
+// === АУДИО-СИСТЕМА ===
 // ============================================================
 var audioCtx = null;
 var masterGain = null;
@@ -705,13 +686,14 @@ var musicGain = null;
 var sfxGain = null;
 var musicPlaying = false;
 var ambientTimer = null;
+var melodyTimer = null;
 var ambientIdx = 0;
+var melodyIdx = 0;
 var soundEnabled = true;
 var musicEnabled = true;
 
-// Громкость музыки на разных экранах
-var MUSIC_VOL_MENU = 0.5;   // В меню — как было
-var MUSIC_VOL_GAME = 0.22;  // В игре — чуть тише
+var MUSIC_VOL_MENU = 0.5;
+var MUSIC_VOL_GAME = 0.22;
 
 function initAudio() {
     if (audioCtx) return;
@@ -740,7 +722,7 @@ function resumeAudio() {
     }
 }
 
-// === КЛИК-ЗВУК ("кремовый" тихий щелчок) ===
+// === КЛИК-ЗВУК ===
 function playClick() {
     if (!audioCtx || !soundEnabled) return;
     resumeAudio();
@@ -797,72 +779,116 @@ function playClick() {
     noise.start(t); noise.stop(t + 0.05);
 }
 
-// === ФОНОВАЯ AMBIENT-МУЗЫКА ===
-var AMBIENT_CHORDS = [
-    [220.00, 261.63, 329.63, 392.00], // Am7
-    [174.61, 220.00, 261.63, 329.63], // Fmaj7
-    [130.81, 196.00, 246.94, 329.63], // Cmaj7
-    [196.00, 246.94, 293.66, 392.00], // G6
-    [146.83, 174.61, 220.00, 261.63], // Dm7
-    [164.81, 196.00, 246.94, 329.63]  // Em
+// ============================================================
+// === ВЕСЁЛАЯ МУЗЫКА (мажор, бодрый ритм) ===
+// ============================================================
+
+// Аккорды в C-dur, весёлые и простые: C - G - Am - F (классический "pоп"-круг)
+var HAPPY_CHORDS = [
+    // C major — до-мажор
+    { notes: [261.63, 329.63, 392.00, 523.25], bass: 130.81 },
+    // G major — соль-мажор
+    { notes: [293.66, 369.99, 440.00, 587.33], bass: 196.00 },
+    // A minor — ля-минор (для лёгкой грустинки, но не траура)
+    { notes: [220.00, 261.63, 329.63, 440.00], bass: 110.00 },
+    // F major — фа-мажор
+    { notes: [174.61, 220.00, 261.63, 349.23], bass: 87.31 }
 ];
 
-var AMBIENT_BASS = [110.00, 87.31, 65.41, 98.00, 73.42, 82.41];
+// Простая весёлая мелодия поверх аккордов (по 8 нот на аккорд)
+var MELODY_NOTES = [
+    // На C
+    [523.25, 587.33, 659.25, 783.99, 659.25, 587.33, 523.25, 587.33],
+    // На G
+    [587.33, 659.25, 783.99, 880.00, 783.99, 659.25, 587.33, 493.88],
+    // На Am
+    [440.00, 523.25, 587.33, 659.25, 587.33, 523.25, 440.00, 392.00],
+    // На F
+    [349.23, 440.00, 523.25, 587.33, 523.25, 440.00, 392.00, 349.23]
+];
 
-function playAmbientChord() {
+var chordIdx = 0;
+
+// Один аккорд с басом и арпеджио (играется ~2 секунды)
+function playHappyChord() {
     if (!audioCtx || !musicPlaying) return;
 
     var now = audioCtx.currentTime;
-    var chord = AMBIENT_CHORDS[ambientIdx % AMBIENT_CHORDS.length];
-    var bass = AMBIENT_BASS[ambientIdx % AMBIENT_BASS.length];
-    ambientIdx++;
+    var chord = HAPPY_CHORDS[chordIdx % HAPPY_CHORDS.length];
+    var melody = MELODY_NOTES[chordIdx % MELODY_NOTES.length];
+    chordIdx++;
 
+    // Бас (низкая нота)
     var bassOsc = audioCtx.createOscillator();
-    bassOsc.type = 'sine';
-    bassOsc.frequency.value = bass;
+    bassOsc.type = 'triangle';
+    bassOsc.frequency.value = chord.bass;
 
     var bassGain = audioCtx.createGain();
     bassGain.gain.setValueAtTime(0, now);
-    bassGain.gain.linearRampToValueAtTime(0.06, now + 1.5);
-    bassGain.gain.setValueAtTime(0.06, now + 4.5);
-    bassGain.gain.linearRampToValueAtTime(0, now + 6.5);
+    bassGain.gain.linearRampToValueAtTime(0.08, now + 0.05);
+    bassGain.gain.setValueAtTime(0.08, now + 0.4);
+    bassGain.gain.exponentialRampToValueAtTime(0.001, now + 1.6);
 
     bassOsc.connect(bassGain);
     bassGain.connect(musicGain);
     bassOsc.start(now);
-    bassOsc.stop(now + 6.7);
+    bassOsc.stop(now + 1.7);
 
-    chord.forEach(function(freq, i) {
+    // Аккорд — 4 ноты играют вместе (лёгкое арпеджио)
+    chord.notes.forEach(function(freq, i) {
         var osc = audioCtx.createOscillator();
-        osc.type = i === 0 ? 'sine' : 'triangle';
+        osc.type = 'triangle';
         osc.frequency.value = freq;
-        osc.detune.value = (i - 1.5) * 4;
+        osc.detune.value = (i - 1.5) * 3;
 
         var g = audioCtx.createGain();
-        var startDelay = i * 0.15;
-        var noteStart = now + startDelay;
+        var noteStart = now + i * 0.05; // легкое арпеджио 50 мс
 
         g.gain.setValueAtTime(0, noteStart);
-        g.gain.linearRampToValueAtTime(0.028, noteStart + 1.3);
-        g.gain.setValueAtTime(0.028, noteStart + 3.2);
-        g.gain.linearRampToValueAtTime(0, noteStart + 5.0);
+        g.gain.linearRampToValueAtTime(0.035, noteStart + 0.08);
+        g.gain.setValueAtTime(0.035, noteStart + 0.5);
+        g.gain.exponentialRampToValueAtTime(0.001, noteStart + 1.5);
 
         osc.connect(g);
         g.connect(musicGain);
         osc.start(noteStart);
-        osc.stop(noteStart + 5.2);
+        osc.stop(noteStart + 1.6);
+    });
+
+    // Мелодия — 8 коротких нот, играются поверх аккорда
+    melody.forEach(function(freq, i) {
+        var osc = audioCtx.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+
+        var g = audioCtx.createGain();
+        var noteStart = now + i * 0.22; // каждые 220 мс — бодрый ритм
+
+        g.gain.setValueAtTime(0, noteStart);
+        g.gain.linearRampToValueAtTime(0.022, noteStart + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.001, noteStart + 0.18);
+
+        osc.connect(g);
+        g.connect(musicGain);
+        osc.start(noteStart);
+        osc.stop(noteStart + 0.2);
     });
 }
 
-// === УПРАВЛЕНИЕ МУЗЫКОЙ ===
+// Функция проигрывания аккордов каждые 1.8 сек — быстрее, чем было
+function playNextChord() {
+    if (!musicPlaying) return;
+    playHappyChord();
+    ambientTimer = setTimeout(playNextChord, 1800);
+}
+
 function startMusic() {
     if (!audioCtx || !musicEnabled) return;
     if (musicPlaying) return;
     musicPlaying = true;
+    chordIdx = 0;
 
-    // Небольшая задержка перед первым аккордом, чтобы плавно подняться
-    playAmbientChord();
-    ambientTimer = setInterval(playAmbientChord, 4500);
+    playNextChord();
 }
 
 function setMusicVolume(vol) {
@@ -883,12 +909,11 @@ function stopMusic() {
     }
 
     if (ambientTimer) {
-        clearInterval(ambientTimer);
+        clearTimeout(ambientTimer);
         ambientTimer = null;
     }
 }
 
-// === КНОПКА MUTE ===
 var muteBtn = document.getElementById('mute-btn');
 muteBtn.addEventListener('click', function(e) {
     e.stopPropagation();
@@ -899,7 +924,6 @@ muteBtn.addEventListener('click', function(e) {
         muteBtn.textContent = '🔊';
         muteBtn.classList.remove('muted');
         startMusic();
-        // Устанавливаем громкость по текущему экрану
         if (document.getElementById('menu').classList.contains('active')) {
             setMusicVolume(MUSIC_VOL_MENU);
         } else {
@@ -913,13 +937,11 @@ muteBtn.addEventListener('click', function(e) {
     }
 });
 
-// === ПЕРВЫЙ КЛИК — инициализация аудио ===
 function onFirstInteraction() {
     initAudio();
     resumeAudio();
     if (soundEnabled) {
         startMusic();
-        // Ставим громкость в зависимости от текущего экрана
         if (document.getElementById('menu').classList.contains('active')) {
             setMusicVolume(MUSIC_VOL_MENU);
         } else {
@@ -934,7 +956,6 @@ document.addEventListener('click', onFirstInteraction);
 document.addEventListener('touchstart', onFirstInteraction);
 document.addEventListener('keydown', onFirstInteraction);
 
-// === ГЛОБАЛЬНЫЙ ЗВУК КЛИКОВ ===
 document.addEventListener('click', function(e) {
     var t = e.target;
     if (!t || !t.closest) return;
@@ -1003,7 +1024,7 @@ var QUESTIONS = {
 };
 
 var GEO_QUESTIONS = [
-    { text: 'Какая общая площадь Беларуси?',
+    { text: 'Какая площадь у Беларуси?',
       options: ['207 593 км²', '149 287 км²', '298 471 км²', '97 843 км²'], correct: 0 },
     { text: 'Где географически находится Беларусь?',
       options: ['В центре Европы', 'На Балканах', 'В Скандинавии', 'На Пиренейском полуострове'], correct: 0 },
@@ -1052,7 +1073,6 @@ function showScreen(id) {
     for (var i = 0; i < screens.length; i++) screens[i].classList.remove('active');
     $(id).classList.add('active');
 
-    // Музыка играет ВЕЗДЕ, но в меню чуть громче
     if (soundEnabled && audioCtx) {
         startMusic();
         if (id === 'menu') {
