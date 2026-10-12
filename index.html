@@ -21,6 +21,30 @@ body { background:#0a0a0a; display:flex; justify-content:center;
 .screen { position:absolute; top:0; left:0; width:100%; height:100%; display:none; }
 .screen.active { display:block; }
 
+/* === MUTE КНОПКА === */
+#mute-btn {
+    position:fixed;
+    top:15px;
+    right:15px;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:rgba(20,20,30,0.7);
+    border:2px solid rgba(233,69,96,0.5);
+    color:#fff;
+    font-size:20px;
+    cursor:pointer;
+    z-index:99999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:all 0.2s;
+    -webkit-tap-highlight-color:transparent;
+}
+#mute-btn:hover { background:rgba(233,69,96,0.3); transform:scale(1.05); }
+#mute-btn:active { transform:scale(0.95); }
+#mute-btn.muted { opacity:0.4; border-color:#555; }
+
 /* === МЕНЮ === */
 #menu {
     background: radial-gradient(circle at center, #1a2a4a 0%, #0a0a15 100%);
@@ -28,18 +52,18 @@ body { background:#0a0a0a; display:flex; justify-content:center;
 }
 #menu.active { display:flex; }
 #menu h1 {
-    font-size:64px; color:#e94560;
+    font-size:58px; color:#e94560;
     text-shadow:0 0 40px rgba(233,69,96,0.8), 0 5px 15px rgba(0,0,0,0.8);
     letter-spacing:12px; margin-bottom:5px;
 }
 #menu .subtitle {
-    color:#a8a8b3; font-size:16px; letter-spacing:6px; margin-bottom:40px;
+    color:#a8a8b3; font-size:15px; letter-spacing:6px; margin-bottom:30px;
 }
 .puzzle-preview {
     width:150px; height:150px;
     border:4px solid #e94560; border-radius:15px;
     display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr;
-    gap:5px; padding:8px; margin-bottom:40px;
+    gap:5px; padding:8px; margin-bottom:15px;
     background:rgba(0,0,0,0.5); box-shadow:0 0 30px rgba(233,69,96,0.4);
 }
 .puzzle-preview .pp-piece {
@@ -49,6 +73,16 @@ body { background:#0a0a0a; display:flex; justify-content:center;
 .puzzle-preview .pp-piece.on {
     background:linear-gradient(135deg, #e94560, #ff8a5c);
     border:2px solid #ff8a5c; box-shadow:0 0 15px rgba(233,69,96,0.9);
+}
+.menu-hint {
+    color:#ffffff;
+    font-size:15px;
+    text-align:center;
+    margin-top:-5px;
+    margin-bottom:25px;
+    padding:0 30px;
+    letter-spacing:0.3px;
+    text-shadow:0 2px 8px rgba(0,0,0,0.8);
 }
 
 .btn {
@@ -103,6 +137,10 @@ body { background:#0a0a0a; display:flex; justify-content:center;
     background:linear-gradient(135deg, #d4a373, #a67c52);
     border:14px solid #5a3e2b;
     box-shadow:0 15px 25px rgba(0,0,0,0.6);
+}
+#obj-sword-painting {
+    top:32%; left:44%; width:110px; height:110px;
+    font-size:80px;
 }
 #obj-flag {
     top:8%; left:45%; width:120px; height:80px;
@@ -452,6 +490,8 @@ body { background:#0a0a0a; display:flex; justify-content:center;
 </head>
 <body>
 
+<button id="mute-btn" title="Звук вкл/выкл">🔊</button>
+
 <div id="game">
 
     <!-- МЕНЮ -->
@@ -464,6 +504,7 @@ body { background:#0a0a0a; display:flex; justify-content:center;
             <div class="pp-piece"></div>
             <div class="pp-piece"></div>
         </div>
+        <div class="menu-hint">Ответь на все вопросы — и откроешь главный символ Лоева!</div>
         <button class="btn" id="btn-play">ИГРАТЬ</button>
     </div>
 
@@ -473,6 +514,7 @@ body { background:#0a0a0a; display:flex; justify-content:center;
         <div class="room-floor"></div>
         <div class="obj" id="obj-window">🪟</div>
         <div class="obj" id="obj-painting">🖼️</div>
+        <div class="obj" id="obj-sword-painting">⚔️</div>
         <div class="obj" id="obj-flag">🇧🇾</div>
         <div class="obj" id="obj-table">
             <div class="obj" id="obj-book" style="top:-40px;left:80px;">📚</div>
@@ -521,7 +563,7 @@ body { background:#0a0a0a; display:flex; justify-content:center;
         <div class="classroom">
             <div class="cabinet-number">Кабинет истории Беларуси №31</div>
             <div class="blackboard">
-                <div class="chalk-text">я первобытный человек угага</div>
+                <div class="chalk-text">История — это память народа</div>
             </div>
             <div class="teacher-desk-visual"></div>
             <div class="teacher">👩‍🏫💻</div>
@@ -565,16 +607,12 @@ body { background:#0a0a0a; display:flex; justify-content:center;
                     </linearGradient>
                 </defs>
 
-                <!-- Небо -->
                 <rect x="0" y="0" width="300" height="133" fill="url(#skyGrad)"/>
-                <!-- Облака -->
                 <ellipse cx="70" cy="30" rx="28" ry="8" fill="rgba(255,255,255,0.35)"/>
                 <ellipse cx="90" cy="28" rx="20" ry="6" fill="rgba(255,255,255,0.35)"/>
                 <ellipse cx="230" cy="45" rx="24" ry="7" fill="rgba(255,255,255,0.25)"/>
 
-                <!-- Зелёная полоса -->
                 <rect x="0" y="133" width="300" height="67" fill="url(#grassGrad)"/>
-                <!-- Тень под замком -->
                 <ellipse cx="150" cy="145" rx="75" ry="6" fill="rgba(0,0,0,0.22)"/>
 
                 <!-- ЛЕВАЯ БАШНЯ -->
@@ -658,9 +696,265 @@ body { background:#0a0a0a; display:flex; justify-content:center;
 <div class="signature">by charodeychikmsm &lt;3</div>
 
 <script>
-// ========== СОСТОЯНИЕ ==========
+// ============================================================
+// === АУДИО-СИСТЕМА (Web Audio API, без внешних файлов) ===
+// ============================================================
+var audioCtx = null;
+var masterGain = null;
+var musicGain = null;
+var sfxGain = null;
+var musicPlaying = false;
+var ambientTimer = null;
+var ambientIdx = 0;
+var soundEnabled = true;
+var musicEnabled = true;
+
+// Громкость музыки на разных экранах
+var MUSIC_VOL_MENU = 0.5;   // В меню — как было
+var MUSIC_VOL_GAME = 0.22;  // В игре — чуть тише
+
+function initAudio() {
+    if (audioCtx) return;
+    try {
+        var AC = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AC();
+        masterGain = audioCtx.createGain();
+        masterGain.gain.value = 0.7;
+        masterGain.connect(audioCtx.destination);
+
+        sfxGain = audioCtx.createGain();
+        sfxGain.gain.value = 1.0;
+        sfxGain.connect(masterGain);
+
+        musicGain = audioCtx.createGain();
+        musicGain.gain.value = 0.0;
+        musicGain.connect(masterGain);
+    } catch (e) {
+        console.warn('Web Audio не поддерживается', e);
+    }
+}
+
+function resumeAudio() {
+    if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+    }
+}
+
+// === КЛИК-ЗВУК ("кремовый" тихий щелчок) ===
+function playClick() {
+    if (!audioCtx || !soundEnabled) return;
+    resumeAudio();
+
+    var t = audioCtx.currentTime;
+
+    var osc1 = audioCtx.createOscillator();
+    osc1.type = 'triangle';
+    osc1.frequency.setValueAtTime(210, t);
+    osc1.frequency.exponentialRampToValueAtTime(85, t + 0.07);
+
+    var gain1 = audioCtx.createGain();
+    gain1.gain.setValueAtTime(0.0001, t);
+    gain1.gain.exponentialRampToValueAtTime(0.09, t + 0.003);
+    gain1.gain.exponentialRampToValueAtTime(0.0001, t + 0.09);
+
+    var osc2 = audioCtx.createOscillator();
+    osc2.type = 'square';
+    osc2.frequency.setValueAtTime(2100, t);
+    osc2.frequency.exponentialRampToValueAtTime(700, t + 0.02);
+
+    var gain2 = audioCtx.createGain();
+    gain2.gain.setValueAtTime(0.0001, t);
+    gain2.gain.exponentialRampToValueAtTime(0.025, t + 0.002);
+    gain2.gain.exponentialRampToValueAtTime(0.0001, t + 0.025);
+
+    var bufferSize = audioCtx.sampleRate * 0.04;
+    var noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    var data = noiseBuffer.getChannelData(0);
+    for (var i = 0; i < bufferSize; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / bufferSize, 3);
+    }
+    var noise = audioCtx.createBufferSource();
+    noise.buffer = noiseBuffer;
+
+    var noiseGain = audioCtx.createGain();
+    noiseGain.gain.value = 0.018;
+
+    var filter = audioCtx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.value = 3500;
+    filter.Q.value = 0.7;
+
+    osc1.connect(gain1);
+    osc2.connect(gain2);
+    noise.connect(noiseGain);
+    gain1.connect(filter);
+    gain2.connect(filter);
+    noiseGain.connect(filter);
+    filter.connect(sfxGain);
+
+    osc1.start(t); osc1.stop(t + 0.12);
+    osc2.start(t); osc2.stop(t + 0.04);
+    noise.start(t); noise.stop(t + 0.05);
+}
+
+// === ФОНОВАЯ AMBIENT-МУЗЫКА ===
+var AMBIENT_CHORDS = [
+    [220.00, 261.63, 329.63, 392.00], // Am7
+    [174.61, 220.00, 261.63, 329.63], // Fmaj7
+    [130.81, 196.00, 246.94, 329.63], // Cmaj7
+    [196.00, 246.94, 293.66, 392.00], // G6
+    [146.83, 174.61, 220.00, 261.63], // Dm7
+    [164.81, 196.00, 246.94, 329.63]  // Em
+];
+
+var AMBIENT_BASS = [110.00, 87.31, 65.41, 98.00, 73.42, 82.41];
+
+function playAmbientChord() {
+    if (!audioCtx || !musicPlaying) return;
+
+    var now = audioCtx.currentTime;
+    var chord = AMBIENT_CHORDS[ambientIdx % AMBIENT_CHORDS.length];
+    var bass = AMBIENT_BASS[ambientIdx % AMBIENT_BASS.length];
+    ambientIdx++;
+
+    var bassOsc = audioCtx.createOscillator();
+    bassOsc.type = 'sine';
+    bassOsc.frequency.value = bass;
+
+    var bassGain = audioCtx.createGain();
+    bassGain.gain.setValueAtTime(0, now);
+    bassGain.gain.linearRampToValueAtTime(0.06, now + 1.5);
+    bassGain.gain.setValueAtTime(0.06, now + 4.5);
+    bassGain.gain.linearRampToValueAtTime(0, now + 6.5);
+
+    bassOsc.connect(bassGain);
+    bassGain.connect(musicGain);
+    bassOsc.start(now);
+    bassOsc.stop(now + 6.7);
+
+    chord.forEach(function(freq, i) {
+        var osc = audioCtx.createOscillator();
+        osc.type = i === 0 ? 'sine' : 'triangle';
+        osc.frequency.value = freq;
+        osc.detune.value = (i - 1.5) * 4;
+
+        var g = audioCtx.createGain();
+        var startDelay = i * 0.15;
+        var noteStart = now + startDelay;
+
+        g.gain.setValueAtTime(0, noteStart);
+        g.gain.linearRampToValueAtTime(0.028, noteStart + 1.3);
+        g.gain.setValueAtTime(0.028, noteStart + 3.2);
+        g.gain.linearRampToValueAtTime(0, noteStart + 5.0);
+
+        osc.connect(g);
+        g.connect(musicGain);
+        osc.start(noteStart);
+        osc.stop(noteStart + 5.2);
+    });
+}
+
+// === УПРАВЛЕНИЕ МУЗЫКОЙ ===
+function startMusic() {
+    if (!audioCtx || !musicEnabled) return;
+    if (musicPlaying) return;
+    musicPlaying = true;
+
+    // Небольшая задержка перед первым аккордом, чтобы плавно подняться
+    playAmbientChord();
+    ambientTimer = setInterval(playAmbientChord, 4500);
+}
+
+function setMusicVolume(vol) {
+    if (!audioCtx) return;
+    musicGain.gain.cancelScheduledValues(audioCtx.currentTime);
+    musicGain.gain.setValueAtTime(musicGain.gain.value, audioCtx.currentTime);
+    musicGain.gain.linearRampToValueAtTime(vol, audioCtx.currentTime + 1.5);
+}
+
+function stopMusic() {
+    if (!musicPlaying) return;
+    musicPlaying = false;
+
+    if (audioCtx) {
+        musicGain.gain.cancelScheduledValues(audioCtx.currentTime);
+        musicGain.gain.setValueAtTime(musicGain.gain.value, audioCtx.currentTime);
+        musicGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1.0);
+    }
+
+    if (ambientTimer) {
+        clearInterval(ambientTimer);
+        ambientTimer = null;
+    }
+}
+
+// === КНОПКА MUTE ===
+var muteBtn = document.getElementById('mute-btn');
+muteBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    soundEnabled = !soundEnabled;
+    musicEnabled = soundEnabled;
+
+    if (soundEnabled) {
+        muteBtn.textContent = '🔊';
+        muteBtn.classList.remove('muted');
+        startMusic();
+        // Устанавливаем громкость по текущему экрану
+        if (document.getElementById('menu').classList.contains('active')) {
+            setMusicVolume(MUSIC_VOL_MENU);
+        } else {
+            setMusicVolume(MUSIC_VOL_GAME);
+        }
+        playClick();
+    } else {
+        muteBtn.textContent = '🔇';
+        muteBtn.classList.add('muted');
+        stopMusic();
+    }
+});
+
+// === ПЕРВЫЙ КЛИК — инициализация аудио ===
+function onFirstInteraction() {
+    initAudio();
+    resumeAudio();
+    if (soundEnabled) {
+        startMusic();
+        // Ставим громкость в зависимости от текущего экрана
+        if (document.getElementById('menu').classList.contains('active')) {
+            setMusicVolume(MUSIC_VOL_MENU);
+        } else {
+            setMusicVolume(MUSIC_VOL_GAME);
+        }
+    }
+    document.removeEventListener('click', onFirstInteraction);
+    document.removeEventListener('touchstart', onFirstInteraction);
+    document.removeEventListener('keydown', onFirstInteraction);
+}
+document.addEventListener('click', onFirstInteraction);
+document.addEventListener('touchstart', onFirstInteraction);
+document.addEventListener('keydown', onFirstInteraction);
+
+// === ГЛОБАЛЬНЫЙ ЗВУК КЛИКОВ ===
+document.addEventListener('click', function(e) {
+    var t = e.target;
+    if (!t || !t.closest) return;
+
+    var clickable = t.closest(
+        '.btn, .opt-btn, .drag-item, .chip, .obj, .drop-zone, ' +
+        '#street-person, #street-school, #btn-play, #btn-restart, ' +
+        '#mute-btn, #dlg-submit'
+    );
+    if (clickable && clickable !== muteBtn) {
+        playClick();
+    }
+});
+
+// ============================================================
+// === ИГРОВАЯ ЛОГИКА ===
+// ============================================================
+
 var state = {
-    solvedRoom: { painting:false, flag:false, book:false, window:false },
+    solvedRoom: { painting:false, swordPainting:false, flag:false, book:false, window:false },
     solvedStreet: { person:false, school:false },
     geoIdx: 0,
     histIdx: 0,
@@ -669,21 +963,25 @@ var state = {
     correctIdx: null
 };
 
-// ========== ВОПРОСЫ ==========
 var QUESTIONS = {
     painting: {
         text: 'Какие реки сливаются в Лоеве?',
         options: ['Днепр и Сож', 'Нил и Амазонка', 'Волга и Кама', 'Днестр и Прут'],
         correct: 0
     },
+    swordPainting: {
+        text: 'В каком веке Лоев впервые упоминается в письменных исторических источниках?',
+        options: ['в XV веке', 'в XIV веке', 'в XVI веке', 'в XIII веке'],
+        correct: 0
+    },
     flag: {
         text: 'Кто является председателем Лоевского райисполкома?',
-        options: ['Николай Клименок', 'Александр Лукашенко', 'Иван Петров', 'Сергей Сидоренко'],
+        options: ['Николай Клименок', 'Александр Мельников', 'Богдан Броев', 'Льоха Денжер'],
         correct: 0
     },
     book: {
-        text: 'О чём повествует музей в Лоеве?',
-        options: ['Битва за Днепр', 'История космонавтики', 'Кулинарные традиции', 'Древние ремёсла'],
+        text: 'Как называется музей в Лоеве?',
+        options: ['Музей битвы за Днепр', 'ФанТайм', 'Музей истории Лоева', 'Музей народного творчества'],
         correct: 0
     },
     window: {
@@ -692,8 +990,8 @@ var QUESTIONS = {
         correctAnswers: ['гомель', 'гомельская', 'гомельской', 'гомельской области', 'в гомельской области']
     },
     person: {
-        text: 'Привет! А какое население у Лоева? Я просто шёл и чёто в голову взбрело)',
-        options: ['6 103 человека', '50 000 человек', '1 200 человек', '100 000 человек'],
+        text: 'Привет, а сколько человек живет в Лоеве? Надо на всех собрать продукты!',
+        options: ['6 103 человека', '47 386 человек', '1 187 человек', '98 742 человека'],
         correct: 0
     },
     school: {
@@ -706,11 +1004,15 @@ var QUESTIONS = {
 
 var GEO_QUESTIONS = [
     { text: 'Какая площадь у Беларуси?',
-      options: ['207 600 км²', '150 000 км²', '300 000 км²', '98 500 км²'], correct: 0 },
+      options: ['207 593 км²', '149 287 км²', '298 471 км²', '97 843 км²'], correct: 0 },
     { text: 'Где географически находится Беларусь?',
       options: ['В центре Европы', 'На Балканах', 'В Скандинавии', 'На Пиренейском полуострове'], correct: 0 },
     { text: 'Какое население у Беларуси?',
-      options: ['9,1 млн человек', '5 млн человек', '20 млн человек', '15 млн человек'], correct: 0 }
+      options: ['9 147 826 человек', '4 873 291 человек', '19 684 173 человека', '14 573 912 человек'], correct: 0 },
+    { text: 'Какая площадь Лоева?',
+      options: ['6,76 км²', '12,43 км²', '3,18 км²', '9,85 км²'], correct: 0 },
+    { text: 'Какая уникальная природная зона находится недалеко от Лоева, известная своими болотами и разнообразием флоры и фауны?',
+      options: ['Припятский национальный парк', 'Беловежская пуща', 'Браславские озёра', 'Нарочанский парк'], correct: 0 }
 ];
 
 var WRONG_COUNTRIES_POOL = [
@@ -726,30 +1028,39 @@ var WWII_YEARS = ['1941', '1945', '1892', '1749', '1939', '1943', '1958', '1991'
 
 var HIST_QUESTIONS = [
     {
-        text: 'В состав каких государств входила территория современной Беларуси? Найди и добавь все 4 правильные страны в поле.',
-        dragMode: 'multi',
-        correctAnswers: CORRECT_COUNTRIES
-    },
-    {
-        text: 'В каких годах происходила ВОВ? Тапни по годам 1941 и 1945, чтобы добавить их в поля.',
+        text: 'В каких годах происходила ВОВ?',
         dragMode: 'ordered',
         dragItems: WWII_YEARS,
         zones: ['Начало', 'Конец']
     },
     {
-        text: 'Какой город в Беларуси назван "Городом Героем"?',
-        options: ['Брест', 'Минск', 'Гомель', 'Витебск'],
+        text: 'В каком году Лоев был освобожден от немецко-фашистских захватчиков?',
+        options: ['1943', '1944', '1942', '1945'],
         correct: 0
+    },
+    {
+        text: 'В состав каких государств входила территория современной Беларуси? Найди и добавь все 4 правильные страны в поле.',
+        dragMode: 'multi',
+        correctAnswers: CORRECT_COUNTRIES
     }
 ];
 
-// ========== УТИЛИТЫ ==========
 function $(id) { return document.getElementById(id); }
 
 function showScreen(id) {
     var screens = document.querySelectorAll('.screen');
     for (var i = 0; i < screens.length; i++) screens[i].classList.remove('active');
     $(id).classList.add('active');
+
+    // Музыка играет ВЕЗДЕ, но в меню чуть громче
+    if (soundEnabled && audioCtx) {
+        startMusic();
+        if (id === 'menu') {
+            setMusicVolume(MUSIC_VOL_MENU);
+        } else {
+            setMusicVolume(MUSIC_VOL_GAME);
+        }
+    }
 }
 
 function shuffle(a) {
@@ -772,7 +1083,6 @@ function addPiece() {
     if (state.pieces < 4) { state.pieces++; updatePreview(); }
 }
 
-// ========== ДИАЛОГ ==========
 function showDialogue(text, optionsHtml, isInput, avatar) {
     $('dlg-text').textContent = text;
     $('dlg-options').innerHTML = optionsHtml || '';
@@ -791,7 +1101,6 @@ function fb(text, ok) {
     el.textContent = text;
 }
 
-// ========== ПЛАВНЫЙ ПЕРЕХОД ==========
 function fadeTo(screenId, callback) {
     document.body.style.transition = 'filter 0.8s';
     document.body.style.filter = 'brightness(0)';
@@ -802,14 +1111,13 @@ function fadeTo(screenId, callback) {
     }, 800);
 }
 
-// ========== МЕНЮ ==========
 $('btn-play').addEventListener('click', function() {
-    state.solvedRoom = { painting:false, flag:false, book:false, window:false };
+    state.solvedRoom = { painting:false, swordPainting:false, flag:false, book:false, window:false };
     state.solvedStreet = { person:false, school:false };
     state.geoIdx = 0;
     state.histIdx = 0;
 
-    ['window','painting','flag','book'].forEach(function(k) {
+    ['window','painting','sword-painting','flag','book'].forEach(function(k) {
         $('obj-' + k).classList.remove('done');
     });
     $('obj-door').classList.remove('open');
@@ -829,21 +1137,22 @@ $('btn-restart').addEventListener('click', function() {
     showScreen('menu');
 });
 
-// ========== КОМНАТА ==========
 function checkRoomDone() {
-    var all = state.solvedRoom.painting && state.solvedRoom.flag &&
-              state.solvedRoom.book && state.solvedRoom.window;
+    var all = state.solvedRoom.painting && state.solvedRoom.swordPainting &&
+              state.solvedRoom.flag && state.solvedRoom.book && state.solvedRoom.window;
     if (all) $('obj-door').classList.add('open');
 }
 
 function markRoom(key) {
     state.solvedRoom[key] = true;
-    $('obj-' + key).classList.add('done');
+    if (key === 'swordPainting') $('obj-sword-painting').classList.add('done');
+    else $('obj-' + key).classList.add('done');
     checkRoomDone();
 }
 
 $('obj-window').addEventListener('click', function() { openQuestion('window', '🪟'); });
 $('obj-painting').addEventListener('click', function() { openQuestion('painting', '🖼️'); });
+$('obj-sword-painting').addEventListener('click', function() { openQuestion('swordPainting', '⚔️'); });
 $('obj-flag').addEventListener('click', function() { openQuestion('flag', '🇧🇾'); });
 $('obj-book').addEventListener('click', function() { openQuestion('book', '📚'); });
 
@@ -855,7 +1164,6 @@ $('obj-door').addEventListener('click', function() {
     fadeTo('street');
 });
 
-// ========== УЛИЦА ==========
 $('street-person').addEventListener('click', function() { openQuestion('person', '🧑‍🌾'); });
 $('street-school').addEventListener('click', function() { openQuestion('school', '🏫'); });
 
@@ -872,7 +1180,6 @@ function markStreet(key) {
     }
 }
 
-// ========== ВОПРОСЫ ==========
 function openQuestion(key, avatar) {
     var q = QUESTIONS[key];
     state.currentKey = key;
@@ -950,7 +1257,6 @@ $('dlg-input-field').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') $('dlg-submit').click();
 });
 
-// ========== ГЕОГРАФИЯ ==========
 function initGeo() {
     if (state.geoIdx >= GEO_QUESTIONS.length) {
         showDialogue('Звенит звонок! Перемена...', null, false, '🔔');
@@ -977,7 +1283,6 @@ function initGeo() {
     for (var j = 0; j < btns.length; j++) btns[j].addEventListener('click', onOptionClick);
 }
 
-// ========== ИСТОРИЯ ==========
 function initHistory() {
     if (state.histIdx >= HIST_QUESTIONS.length) {
         addPiece();
@@ -1012,7 +1317,7 @@ function initHistory() {
                     '<div class="drop-zone" id="dz1" data-placeholder="Конец">Конец</div>' +
                 '</div>' +
             '</div>' +
-            '<div class="drag-label" style="margin-top:15px;">📦 Доступные года (тапни по нужным):</div>' +
+            '<div class="drag-label" style="margin-top:15px;">📦 Доступные года:</div>' +
             '<div class="drag-items" id="years-pool">' + itemsHtml + '</div>' +
             '<div style="text-align:center; margin-top:15px;">' +
                 '<button class="opt-btn" id="btn-check-drag" style="padding:14px 40px; font-size:16px;">Проверить</button>' +
@@ -1037,7 +1342,6 @@ function initHistory() {
     for (var j = 0; j < btns.length; j++) btns[j].addEventListener('click', onOptionClick);
 }
 
-// ========== MULTI DRAG (страны) — тап/клик ==========
 function buildMultiDragHtml(q) {
     var wrongs = shuffle(WRONG_COUNTRIES_POOL.slice()).slice(0, 4);
     var allItems = shuffle(q.correctAnswers.concat(wrongs));
@@ -1153,7 +1457,6 @@ function checkMultiDrop() {
     }
 }
 
-// ========== ORDERED DRAG (года) — тап/клик ==========
 function setupOrderedDrag() {
     var items = document.querySelectorAll('#years-pool .drag-item');
     var zones = document.querySelectorAll('.drop-zone');
@@ -1204,7 +1507,6 @@ function setupOrderedDrag() {
     });
 }
 
-// ========== ФИНАЛ ==========
 function showFinal() {
     showScreen('final');
     $('final-msg').style.display = 'block';
@@ -1221,7 +1523,6 @@ function showFinal() {
     }, 2500);
 }
 
-// Первичная отрисовка
 updatePreview();
 </script>
 </body>
